@@ -1,0 +1,10 @@
+Inside file trade_upload.html <br/>
+
+{{order}}
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Upload CSV file</label>
+    <input type="file" name="fileipcsv"/> 
+    <input type="submit">Upload File</input>
+</form>

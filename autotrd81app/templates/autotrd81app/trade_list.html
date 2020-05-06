@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 color='green'>Trades Executed today</h2>
+<table border='1'>
+    {% for trd in trade_list %}
+    <tr>
+        {% for field, value in trd.get_fields %}
+                <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+
+
