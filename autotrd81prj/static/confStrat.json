@@ -1,0 +1,54 @@
+{
+    "SS_EQUITY": {
+        "SYM": {"SYMLIST":["BAJFINANCE", "BHARTIARTL", "CPSEETF", "GLENMARK", "GOLDBEES", "HCLTECH", "HDFCBANK", "ICICIBANK", "ICICINIFTY", "IDBI", "INFY", "ITC", "JPASSOCIAT", "LT", "MCX", "NDTV", "NIACL", "NIFTYBEES", "RELIANCE ", "RENUKA", "SBICARD", "SBIN", "SINTEX", "SPTL", "SUNPHARMA", "SUZLON", "TATASTEEL", "TCS", "YESBANK"]},
+        "REF": null, "EXCHANGE":"NSE", "ASSET_TYPE":"EQ",
+        "STRAT_TYPE":"SELF", "SWING_SIZE":{"CHANGE":"5%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"LAST_TRD"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_AUTO", "FREQ_SEC":"300", "TIMEFRAME":{"DAY":"WEEKDAY", "START_TIME":"03:47", "END_TIME":"09:58"}},
+        "PFLimits":{"MAX":{"LIMIT":"15000"},"MIN":{"LIMIT":"3000"}, "TYPE":"TOTAL"},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"2000", "TYPE":"TOTAL"}},
+        "__comment": "This strategy will run on SYMLIST provided, and for each Symbol it will buy and sell based on swing given by SWING_SIZE:CHANGE (5%)"
+    },
+    "SS_CURR_FUT_PAIRS": {
+        "SYM": {"SYMLIST":["EURINR{0}FUT", "GBPINR{0}FUT", "JPYINR{0}FUT", "USDINR{0}FUT"],"FILLER0": "20MAY"},
+        "REF": null, "EXCHANGE":"CDS", "ASSET_TYPE":"CFO",  "DEFAULT_QTY":"2",
+        "STRAT_TYPE":"CROSS_COMP", "SWING_SIZE":{"CHANGE":"1%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"LAST_TRD"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_AUTO", "FREQ_SEC":"300", "TIMEFRAME":{"DAY":"WEEKDAY", "START_TIME":"03:32", "END_TIME":"11:28"}},
+        "PFLimits":{"MAX":{"LIMIT":"10"},"MIN":{"LIMIT":"0"}, "TYPE":"QTY"},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"2", "TYPE":"QTY"}},
+        "__comment": "This strategy will run on SYMLIST provided, and for each Symbol it will crossverify the relative change (based on respective last trade) and comparing the largest up-move against largest dip to idenfity buy and sell signal SWING_SIZE:CHANGE (1%)"
+    },
+    "SS_CURR_OPT": {
+        "SYM": {"SYMLIST":["USDINR{0}*[CE|PE]"], "FILLER0": "20MAY"}, "QTY_MULTIPLIER":"1000",
+        "REF": {"REF_SYM":"USDINR", "FILLER0": "20MAY", "REF_SRC":"KITE"}, "EXCHANGE":"CDS", "ASSET_TYPE":"CFO", "DEFAULT_QTY":"1",
+        "STRAT_TYPE":"REF_BASED", "SWING_SIZE":{"CHANGE":"1%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"REF"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_AUTO", "FREQ_SEC":"300", "TIMEFRAME":{"DAY":"WEEKDAY", "START_TIME":"03:32", "END_TIME":"11:28"}},
+        "PFLimits":{"MAX":{"LIMIT":"10"},"MIN":{"LIMIT":"0"}, "TYPE":"QTY"},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"2", "TYPE":"QTY", "MIN_PRICE":"0.4"}, "INSURANCE_SIZE":{"LIMIT":"4", "TYPE":"QTY", "MAX_PRICE":"0.1"}}
+    },
+    "SS_NIFTY_FUTOPT": {
+        "SYM": {"SYMLIST":["NIFTY{0}*[FUT|CE|PE]"],"FILLER0": "20MAY"},
+        "REF": {"REF_SYM":"NIFTY 50", "REF_SRC":"KITE"},  "EXCHANGE":"NFO", "ASSET_TYPE":"NFO",  "DEFAULT_QTY":"75",
+        "STRAT_TYPE":"REF_BASED", "SWING_SIZE":{"CHANGE":"3%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"REF"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_AUTO", "FREQ_SEC":"300", "TIMEFRAME":{"DAY":"WEEKDAY", "START_TIME":"03:47", "END_TIME":"09:58"}},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"75", "TYPE":"QTY", "MIN_PRICE":"250"}, "INSURANCE_SIZE":{"LIMIT":"75", "TYPE":"QTY", "MAX_PRICE":"49"}}
+    },
+    "SS_REV_CURR_PAIRS": {
+        "SYM": {"SYMLIST":["AED", "AUD","CAD","CHF","DKK","EUR","GBP","INR","JPY","NOK","NZD","USD"], "SYM_CROSS":true},
+        "REF": {"REF_SYM":"SELF", "CROSS_REF":"USD", "REF_SRC":"http://data.fixer.io/api/latest?access_key=c917c4d28c7a5e95326a3b6616c8ac4a&format=1&base={CROSS_REF}&symbols={CSV_LIST}"},
+        "EXCHANGE":"REV", "ASSET_TYPE":"CUR", "DEFAULT_QTY":"1",
+        "STRAT_TYPE":"CROSS_COMP_GLOBAL", "SWING_SIZE":{"CHANGE":"1%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"LAST_TRD"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_SUGGEST", "TIMEFRAME":{"DAY":"WEEKDAY"}},
+        "PFLimits":{"MAX":{"LIMIT":"5000"},"MIN":{"LIMIT":"500"}, "TYPE":"TOTAL", "CURR":"NOK"},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"500", "TYPE":"TOTAL", "CURR":"NOK"}}
+    },
+    "SS_REV_CURR_BTC": {
+        "SYM": {"SYMLIST":["AED", "AUD","CAD","CHF","DKK","EUR","GBP","INR","JPY","NOK","NZD","USD"]},
+        "REF": {"REF_SYM":"BTCUSD", "CROSS_REF":"BTC", "REF_SRC":"https://api.coindesk.com/v1/bpi/currentprice.json"},
+        "EXCHANGE":"REV", "ASSET_TYPE":"DIG", "DEFAULT_QTY":"1",
+        "STRAT_TYPE":"REF_BASED", "SWING_SIZE":{"CHANGE":"5%", "CHANGE_TYPE":"RELATIVE", "SWING_BASE":"LAST_TRD"}, 
+        "EXEC_POLICY":{"TRADE_POLICY":"TRADE_SUGGEST", "TIMEFRAME":{"DAY":"WEEKDAY"}},
+        "PFLimits":{"MAX":{"LIMIT":"5000"},"MIN":{"LIMIT":"500"}, "TYPE":"TOTAL", "CURR":"NOK"},
+        "ORDER_SIZE":{"POSITION_SIZE":{"LIMIT":"500", "TYPE":"TOTAL", "CURR":"NOK"}}
+    },
+    "SS_REV_COMMOD": {"SYM": {"SYMLIST":["GOLD"]}}
+}

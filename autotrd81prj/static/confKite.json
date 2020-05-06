@@ -1,0 +1,7 @@
+{
+    "KITE_ACCESS_TOKEN" : "vHsRpZO2k2ok5z117Z4mywUhQovZRVbh",
+    "apiKey" : "r0si6b584v698rl1",
+    "DATA_FIXER_IO": "http://data.fixer.io/api/latest?access_key=c917c4d28c7a5e95326a3b6616c8ac4a&format=1&base=EUR&symbols={CSV_LIST}",
+    "COIN_DESK_URL": "https://api.coindesk.com/v1/bpi/currentprice.json",
+    "COIN_DESK_URL_FOR_CURR":"https://api.coindesk.com/v1/bpi/currentprice/{CURR}.json"
+}
